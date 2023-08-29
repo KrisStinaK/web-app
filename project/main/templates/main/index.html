@@ -1,0 +1,11 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>{{ title }}</h1>
+        <p>Бла бла бла бла бла бла бла бла бла бла бля</p>
+        <a href="{% url 'about' %}" class="btn btn-warning">На страницу про нас</a>
+    </div>
+{% endblock %}
