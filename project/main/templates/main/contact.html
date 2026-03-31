@@ -1,0 +1,79 @@
+{% extends "main/base.html" %}
+{% block title %}Контакты - Новости сайта{% endblock %}
+{% block content %}
+<style>
+
+  .features {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+  }
+
+  .contact-item span {
+    font-weight: bold;
+    width: 150px;
+  }
+
+  /* Карта или форма обратной связи можно добавить позже */
+
+  /* Мобильная адаптация */
+  @media(max-width: 600px) {
+    .contact-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .contact-item span {
+      width: auto;
+    }
+  }
+</style>
+
+<div class="features">
+  <h1>Контакты</h1>
+  
+  <div class="contact-info">
+    <div class="contact-item">
+      <span>Телефон:</span>
+      <a href="tel:+71234567890">+7 (000) 000-00-00</a>
+    </div>
+    <div class="contact-item">
+      <span>Email:</span>
+      <a href="mailto:info@newswebsite.com">info@newswebsite.com</a>
+    </div>
+    <div class="contact-item">
+      <span>Адрес:</span>
+      <address>г. Москва, ул. Новостная, д. 10</address>
+    </div>
+    <div class="contact-item">
+      <span>Социальные сети:</span>
+      <a href="#" target="_blank">Facebook</a> | 
+      <a href="#" target="_blank">Twitter</a> | 
+      <a href="#" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <h2 style="text-align:center; margin-bottom:20px;">Обратная связь</h2>
+    <form action="/send-message" method="POST" style="display:flex; flex-direction:column; gap:15px;">
+      <input type="text" name="name" placeholder="Ваше имя" required style="padding:12px; border-radius:8px; border:1px solid #ccc; font-size:1em;" />
+      <input type="email" name="email" placeholder="Ваш email" required style="padding:12px; border-radius:8px; border:1px solid #ccc; font-size:1em;" />
+      <textarea name="message" rows="5" placeholder="Ваше сообщение" required style="padding:12px; border-radius:8px; border:1px solid #ccc; font-size:1em;"></textarea>
+      <button type="submit" style="padding:14px; border:none; border-radius:8px; background-color:#28a745; color:#fff; font-size:1em; cursor:pointer;">Отправить сообщение</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

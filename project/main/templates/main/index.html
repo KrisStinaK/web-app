@@ -1,11 +1,123 @@
 {% extends "main/base.html" %}
-
+{% load static %}
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <div class="features">
-        <h1>{{ title }}</h1>
-        <p>Бла бла бла бла бла бла бла бла бла бла бля</p>
-        <a href="{% url 'about' %}" class="btn btn-warning">На страницу про нас</a>
+<style>
+
+  .container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section h2 {
+    border-bottom: 2px solid #2c3e50;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .article {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+
+  .article:hover {
+    transform: translateY(-5px);
+  }
+
+  .article img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .article-content {
+    padding: 15px;
+  }
+
+  .article h3 {
+    margin-top: 0;
+    color: #222;
+  }
+
+  .article p {
+    font-size: 0.95em;
+    line-height: 1.4;
+  }
+
+  /* Мобильная адаптация */
+  @media(max-width: 768px) {
+    header h1 {
+      font-size: 2em;
+    }
+    nav a {
+      display: block;
+      margin: 10px 0;
+    }
+  }
+</style>
+</style>
+    <div class="container">
+  <!-- Последние новости -->
+  <section class="section" id="latest-news">
+    <h2>Последние новости</h2>
+    <div class="articles">
+      {% for new in news %}
+      <!-- Статья 1 -->
+      <div class="article">
+        {% if new.image %}
+            <img src="{{ new.image.url }}"/>
+        {% else %}
+            <img src="{% static 'main/img/2.png' %}"/>
+        {% endif %}
+        <div class="article-content">
+          <h3>{{ new.title }}</h3>
+          <p>{{ new.anons }}</p>
+          <a href="{% url 'news-detail' new.id %}">Читать далее</a>
+        </div>
+      </div>
+      {% empty %}
+          Новостей не найдено
+      {% endfor %}
     </div>
+  </section>
+
+  <!-- Популярные статьи -->
+  <section class="section" id="popular">
+    <h2>Популярные статьи</h2>
+    <div class="articles">
+      {% for new in news_p %}
+      <div class="article">
+          {% if new.image %}
+              <img src="{{ new.image.url }}"/>
+          {% else %}
+              <img src="{% static 'main/img/2.png' %}"/>
+          {% endif %}
+        <div class="article-content">
+          <h3>{{new.title}}</h3>
+          <p>{{new.anons}}</p>
+          <a href="{% url 'news-detail' new.id %}">Читать далее</a>
+        </div>
+      </div>
+      {% empty %}
+        Популярных статей не найдено
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
 {% endblock %}

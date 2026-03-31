@@ -1,5 +1,48 @@
 {% extends "main/base.html" %}
+{% load static %}
 
+
+<style>
+    .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.news-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.news-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.news-content {
+    padding: 15px;
+}
+
+.news-title {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+}
+
+.news-description {
+    font-size: 0.95em;
+    color: #555;
+}
+</style>
 {% block title %}Новости{% endblock %}
 
 {% block content %}
@@ -7,15 +50,28 @@
         <h1>Новости сайта</h1>
         {% if news %}
             {% for el in news %}
-                <div class="alert alert-warning">
-                    <h3> {{el.title}} </h3>
-                    <p> {{el.anons}} </p>
-                    <a href="{% url 'news-detail' el.id %}" class="btn btn-warning"> Читать детали </a>
+            <div class="container">
+    
+                <div class="news-grid">
+                    <div class="news-item">
+                        {% if el.image %}
+                            <img src="{{ el.image.url }}"/>
+                        {% else %}
+                            <img src="{% static 'main/img/2.png' %}"/>
+                        {% endif %}
+                        <div class="news-content">
+                            <h2 class="news-title">{{el.title}}</h2>
+                            <p class="news-description">{{el.anons}}</p>
+                            <a href="{% url 'news-detail' el.id %}" class="btn btn-warning"> Читать детали </a>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            
+                
             {% endfor %}
         {% else %}
             <p>У Вас нет записей!</p>
         {% endif %}
-
-    </div>
+</div>
 {% endblock %}

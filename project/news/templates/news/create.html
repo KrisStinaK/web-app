@@ -1,18 +1,124 @@
 {% extends "main/base.html" %}
-
-{% block title %}Форма для добавления статьи{% endblock %}
-
+<title>Редактировать статью</title>
 {% block content %}
-    <div class="features">
-        <h1>Форма для добавления статьи</h1><br>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.title }}<br><br>
-            {{ form.anons }}<br><br>
-            {{ form.full_text }}<br><br>
-            {{ form.date }}<br><br>
-            <span> {{ error }}</span>
-            <button class="btn btn-success" type="submit">Добавить статью</button>
-        </form>
+<style>
+  .form-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+  }
+
+  input[type="text"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+
+  input[type="text"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  textarea {
+    height: 200px;
+    resize: vertical;
+  }
+
+  .image-preview {
+    margin-top: 10px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .upload-group {
+    margin-top: 15px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 20px;
+  }
+
+  button {
+    padding: 14px 30px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .btn-primary {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background-color: #218838;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+</style>
+</head>
+<body>
+
+<div class="form-wrapper">
+  <h2>Добавить статью</h2>
+  <form  method="POST">
+    {% csrf_token %}
+    <label for="title">Заголовок</label>
+    {{form.title}}
+    <label for="title">Анонс</label>
+    {{form.anons}}
+
+
+    <label for="content">Текст статьи</label>
+    {{form.full_text}}
+
+    <!-- <label>Изображение</label>
+    <div class="upload-group">
+      <input type="file" id="image" name="image" accept="image/*" />
+      <img src="https://via.placeholder.com/150" alt="Предварительный просмотр" class="image-preview" />
+    </div> -->
+
+    <div class="buttons">
+      <button type="submit" class="btn-primary">Сохранить</button>
+      <button type="button" class="btn-secondary" onclick="window.history.back()">Отмена</button>
     </div>
+  </form>
+</div>
 {% endblock %}
