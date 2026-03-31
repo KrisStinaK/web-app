@@ -52,8 +52,6 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-5. 
-
 ## Запуск
 Запустите сервер разработки:
 
